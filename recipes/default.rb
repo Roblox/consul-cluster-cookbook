@@ -6,6 +6,9 @@
 #
 poise_service_user node['consul']['service_user'] do
   group node['consul']['service_group']
+  not_if { node.platform_family?('windows') }
+  not_if { node['consul']['service_user'] == 'root' }
+  not_if { node['consul']['create_service_user'] == false }
 end
 
 directory File.dirname(node['consul-cluster']['tls']['ssl_key']['path']) do
