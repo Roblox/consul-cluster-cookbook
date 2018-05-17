@@ -13,19 +13,25 @@ end
 
 directory File.dirname(node['consul-cluster']['tls']['ssl_key']['path']) do
   recursive true
-  owner node['consul']['service_user']
-  group node['consul']['service_group']
+  unless platform?('windows')
+    owner node['consul']['service_user']
+    group node['consul']['service_group']
+  end
 end
 
 directory File.dirname(node['consul-cluster']['tls']['ssl_cert']['path']) do
   recursive true
-  owner node['consul']['service_user']
-  group node['consul']['service_group']
+  unless platform?('windows')
+    owner node['consul']['service_user']
+    group node['consul']['service_group']
+  end
 end
 
 certificate = ssl_certificate node['consul']['service_name'] do
-  owner node['consul']['service_user']
-  group node['consul']['service_group']
+  unless platform?('windows')
+    owner node['consul']['service_user']
+    group node['consul']['service_group']
+  end
   namespace node['consul-cluster']['tls']
   notifies :reload, "consul_service[#{name}]", :delayed
 end
