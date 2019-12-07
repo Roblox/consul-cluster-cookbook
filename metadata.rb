@@ -11,4 +11,4 @@ supports 'redhat', '>= 6.4'
 supports 'ubuntu', '>= 12.04'
 
 depends 'ssl_certificate', '~> 2.1'
-depends 'consul', '~> 3.1'
+depends 'consul', '~> 9003.1'
